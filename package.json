@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "通过配置文件生成后台管理页面",
   "main": "index.js",
-  "private": true,
   "dependencies": {
     "antd": "^3.10.0",
     "moment": "^2.22.2",
