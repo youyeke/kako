@@ -1,17 +1,11 @@
 export default {
   layout: 'Grid',
-  items: [
+  default: [
     {
-      span: 12,
+      span: 24,
       keepLive: false,
-      support: 'list',
-      component: 'List',
-    },
-    {
-      span: 12,
-      keepLive: false,
-      support: 'list',
-      component: 'List',
+      support: 'search',
+      component: 'Search',
     },
     {
       span: 24,
@@ -20,4 +14,5 @@ export default {
       component: 'List',
     },
   ],
+  form: [],
 }

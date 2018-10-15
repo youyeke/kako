@@ -6,9 +6,9 @@ export default () => {
     <div className="Kako-Support-container">
       <div className="Kako-Support-flex">
         <div className="Kako-Support-flex">
-          <span className="Kako-Support-round"></span>
-          <span className="Kako-Support-gap"></span>
-          <span className="Kako-Support-block"></span>
+          {/* <span className="Kako-Support-round"></span> */}
+          {/* <span className="Kako-Support-gap"></span> */}
+          {/* <span className="Kako-Support-block"></span> */}
         </div>
         <span className="Kako-Support-button"></span>
       </div>

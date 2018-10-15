@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from './components/Layout';
-import { SAList } from './components/Animation';
+import { getMainLayout, getItem } from './utils/readConfig';
 
 export default class Kako extends Component {
   state = {
@@ -19,32 +18,10 @@ export default class Kako extends Component {
     const MainLayout = getMainLayout(config.layout);
     return (
       <MainLayout key="mainLayout">
-        { config.items.map( (itemConfig,index) => {
+        { config.default.map( (itemConfig,index) => {
           return getItem(itemConfig,index);
         } ) }
       </MainLayout>
     );
   }
-}
-
-function getMainLayout(layoutName){
-  const layoutMap = {
-    Grid,
-  };
-  return layoutMap[layoutName] || layoutMap['Grid'];
-}
-
-function getItem(itemConfig,index){
-  const { support, component, ...restConfig } = itemConfig;
-  const supportMap = {
-    list: SAList,
-  };
-  const contentMap = {
-    List: () => <div>List</div>,
-  };
-  const Support = supportMap[support] || supportMap['list'];
-  const Content = contentMap[component] || contentMap['List'];
-  return <Support { ...restConfig } key={ index }>
-    <Content />
-  </Support>;
 }
