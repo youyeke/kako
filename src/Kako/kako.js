@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getMainLayout, getItem } from './utils/readConfig';
+import { getMainLayout } from './utils/readConfig';
+import { router } from './utils/router';
 
 export default class Kako extends Component {
   state = {
@@ -18,9 +19,7 @@ export default class Kako extends Component {
     const MainLayout = getMainLayout(config.layout);
     return (
       <MainLayout key="mainLayout">
-        { config.default.map( (itemConfig,index) => {
-          return getItem(itemConfig,index);
-        } ) }
+        { router( restProps.location, config ) }
       </MainLayout>
     );
   }

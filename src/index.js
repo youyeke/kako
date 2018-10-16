@@ -1,6 +1,7 @@
 import React from 'react';
-import Kako from './Kako';
 import ReactDOM from 'react-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import Kako from './Kako';
 import demoConfig from './demoConfig';
 
 import 'antd/dist/antd.css';
@@ -8,5 +9,12 @@ import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Kako config={ demoConfig } />, document.getElementById('root'));
+const App = (props) => <Kako { ...props } config={ demoConfig } />;
+
+ReactDOM.render( (
+  <Router>
+    <Route path="/" component={ App }></Route>
+  </Router>
+)
+, document.getElementById('root'));
 serviceWorker.unregister();
