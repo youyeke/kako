@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
-import { getMainLayout } from './utils/readConfig';
-import { router } from './utils/router';
+import { getMainLayout, getItem } from './utils/readConfig';
 
 export default class Kako extends Component {
-  state = {
-    ready: false,
-  }
-  componentDidMount(){
-    setTimeout( _=> {
-      this.setState({
-        ready: true,
-      });
-    }, 1500);
-  }
   render() {
     const { config, ...restProps } = this.props;
-    // const { ready } = this.state;
     const MainLayout = getMainLayout(config.layout);
     return (
       <MainLayout key="mainLayout">
-        { router( restProps.location, config ) }
+        { config.items.map( (itemCfg,index) => getItem(itemCfg,index) ) }
       </MainLayout>
     );
   }
