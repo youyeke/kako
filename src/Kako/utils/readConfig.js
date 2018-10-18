@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid } from '../components/Layout';
 import { SASearch, SAList } from '../components/Animation';
 
+let extendsComponent = {};
+
 export function getMainLayout(layoutName){
   const layoutMap = {
     Grid,
@@ -18,10 +20,15 @@ export function getItem(itemConfig,index){
   const contentMap = {
     Search: () => <div>Search</div>,
     List: () => <div>List</div>,
+    ...extendsComponent,
   };
   const Support = supportMap[support] || supportMap['list'];
   const Content = contentMap[component] || contentMap['List'];
   return <Support { ...restConfig } key={ index }>
     <Content />
   </Support>;
+}
+
+export function setExtends(extendsObj){
+  extendsComponent = extendsObj;
 }
