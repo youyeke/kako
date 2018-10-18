@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from '../components/Layout';
 import { SASearch, SAList } from '../components/Animation';
+import * as BaseComponentSet from '../components/BaseComponent';
 
 let extendsComponent = {};
 
@@ -19,8 +20,7 @@ export function getItem(itemConfig,index,props){
     List: SAList,
   };
   const contentMap = {
-    Search: () => <div>Search</div>,
-    List: () => <div>List</div>,
+    ...BaseComponentSet,
     ...extendsComponent,
   };
   const Support = supportMap[support] || supportMap['Search'];
