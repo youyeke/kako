@@ -3,7 +3,7 @@ import QueueAnim from 'rc-queue-anim';
 import './index.css';
 
 export default (props) => {
-  const { ready, suppor, mark, children } = props;
+  const { ready = false, suppor, mark, children } = props;
   
   return <QueueAnim
     interval={ 0 }

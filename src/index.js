@@ -1,5 +1,5 @@
-import Kako from './kako';
-import { setExtends } from './kako/utils/readConfig';
+import Kako from './Kako';
+import { setExtends } from './Kako/utils/readConfig';
 
 export default Kako;
 

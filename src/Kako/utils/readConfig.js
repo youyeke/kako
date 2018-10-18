@@ -11,21 +11,22 @@ export function getMainLayout(layoutName){
   return layoutMap[layoutName] || layoutMap['Grid'];
 }
 
-export function getItem(itemConfig,index){
+export function getItem(itemConfig,index,props){
   const { support, component, ...restConfig } = itemConfig;
+  const { ready = {} } = props;
   const supportMap = {
-    search: SASearch,
-    list: SAList,
+    Search: SASearch,
+    List: SAList,
   };
   const contentMap = {
     Search: () => <div>Search</div>,
     List: () => <div>List</div>,
     ...extendsComponent,
   };
-  const Support = supportMap[support] || supportMap['list'];
+  const Support = supportMap[support] || supportMap['Search'];
   const Content = contentMap[component] || contentMap['List'];
-  return <Support { ...restConfig } key={ index }>
-    <Content />
+  return <Support ready={ ready[index] } { ...restConfig } key={ index }>
+    <Content { ...props } />
   </Support>;
 }
 
