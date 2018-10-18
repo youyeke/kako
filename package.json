@@ -1,8 +1,8 @@
 {
   "name": "kako",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "通过配置文件生成后台管理页面",
-  "main": "index.js",
+  "main": "lib/index.js",
   "dependencies": {
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",

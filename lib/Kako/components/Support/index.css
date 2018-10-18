@@ -1,0 +1,47 @@
+.Kako-Support-container{
+  padding: .5em;
+  background: #fff;
+}
+.Kako-Support-flex{
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* items */
+.Kako-Support-round{
+  width: 3em;
+  height: 3em;
+  border-radius: 1.5em;
+  background: #ccc;
+}
+.Kako-Support-block{
+  width: 10em;
+  height: 2em;
+  background: #ccc;
+}
+.Kako-Support-gap{
+  width: 2em;
+}
+.Kako-Support-button{
+  color: #fff;
+  background: #019bf0;
+  min-width: 6em;
+  height: 2em;
+  padding: .25em .5em;
+}
+
+.Kako-Support-table-header{
+  flex: 1;
+  height: 3em;
+  background: #ccc;
+  border-radius: 6px 6px 0 0;
+}
+.Kako-Support-table-items{
+  height: 3em;
+  background: #eee;
+  border-bottom: 1px solid #aaa;
+}
+.Kako-Support-table-items:nth-child(2n){
+  background: #fff;
+}

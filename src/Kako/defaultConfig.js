@@ -3,14 +3,12 @@ export default {
   items: [
     {
       span: 24,
-      keepLive: false,
-      support: 'search',
+      support: 'Search',
       component: 'Search',
     },
     {
       span: 24,
-      keepLive: false,
-      support: 'list',
+      support: 'List',
       component: 'List',
     },
   ],
