@@ -3,7 +3,7 @@ import QueueAnim from 'rc-queue-anim';
 import './index.css';
 
 export default (props) => {
-  const { ready = false, suppor, mark, children } = props;
+  const { ready = false, suppor, mark, children, ...restProps } = props;
   
   return <QueueAnim
     interval={ 0 }
@@ -27,6 +27,7 @@ export default (props) => {
         (
           React.cloneElement(children,{
             key: 'content',
+            ...restProps,
           })
         )
         : React.createElement(suppor,{
