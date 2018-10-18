@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import Kako from './Kako';
+import Kako from '../Kako';
 import demoConfig from './demoConfig';
 
 import 'antd/dist/antd.css';
