@@ -21,11 +21,13 @@ export default {
           { title: '删除', action: 'delete' }
         ],
       },
-      listData: [
-        { id: '10086', name: '张三' },
-        { id: '10087', name: '李四' },
-        { id: '10088', name: '老王' },
-      ],
+      listData: {
+        data: [
+          { id: '10086', name: '张三' },
+          { id: '10087', name: '李四' },
+          { id: '10088', name: '老王' },
+        ],
+      },
     },
   ],
 }

@@ -1,16 +1,31 @@
 import React from 'react';
 import { Icon, Dropdown, Menu } from 'antd';
+import { Consumer } from '../EvenProxy/ListEvenSet';
 
-export default ({ text, record, index, options }) => {
-  return <Dropdown overlay={ renderMemu(record,options) } trigger={['click']} placement="bottomRight">
+export default props => (
+  <Consumer>
+    { context => <ListOptions {...props} context={ context } />}
+  </Consumer>
+);
+
+const ListOptions = ({ text, record, index, options, context }) => {
+  function actionMap(type, actionOts) {
+    type = type.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+    if( context[`on${type}`] ){
+      context[`on${type}`](record,actionOts);
+    }else{
+      console.warn(`未注册的事件： on${type}`)
+    }
+  }
+  return <Dropdown overlay={ renderMemu(record,options,actionMap) } trigger={['click']} placement="bottomRight">
     <Icon style={{fontSize: '24px'}} type="ellipsis" />
   </Dropdown>;
 }
 
-function renderMemu(record,options){
+function renderMemu(record,options,actionMap){
   let menuItemList = options.map( (v,i,a) => {
     v.options = v.options || {};
-    return operationMap['defaults'].bind(null,v,i,a,record)();
+    return operationMap['defaults'].bind(null,v,i,a,record,actionMap)();
   } ).filter( item => item );
 
   if(menuItemList.length === 0){
@@ -23,7 +38,7 @@ function renderMemu(record,options){
 }
 
 const operationMap = {
-  'defaults': (v,i,a,record) => {
+  'defaults': (v,i,a,record,actionMap) => {
     if( !testValue(record,v.options) ){
       return null;
     }
@@ -41,9 +56,9 @@ const operationMap = {
     };
     return (
       <Menu.Item key={i} className="Kako-table-action-menuItem" >
-       <Icon type={ iconMap[v.action] || iconMap['default'] } style={{ color: `${iconColorMap[v.action] || iconColorMap['default']}` }} />{ v.title }
-        {/* <a onClick={ this.actionMap.bind(null, v.action, record, v.options ) }>
-        </a> */}
+        <span onClick={ actionMap.bind(null, v.action, v.options ) }>
+          <Icon type={ iconMap[v.action] || iconMap['default'] } style={{ color: `${iconColorMap[v.action] || iconColorMap['default']}` }} />{ v.title }
+        </span>
       </Menu.Item>
     );
   }

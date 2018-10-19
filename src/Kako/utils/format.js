@@ -25,10 +25,10 @@ export function formatTableFields(fields = [],options = []){
       width: 30,
       render: (text, record, index) => {
         return <ListOptions
-        text={ text }
-        record={ record }
-        index={ index }
-        options={ options }
+          text={ text }
+          record={ record }
+          index={ index }
+          options={ options }
         />;
       },
     });
