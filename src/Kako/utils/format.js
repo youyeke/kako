@@ -1,15 +1,15 @@
 import React from 'react';
-import { ListOptions } from '../components/BaseElement';
+import { ListOperation } from '../components/BaseElement';
 
 /**
  *
  * 统一 Table columns 的格式
  * @export
  * @param {array} fields 标准化的 fields
- * @param {array} options 对该行的操作
+ * @param {array} operation 对该行的操作
  * @returns antd Table columns
  */
-export function formatTableFields(fields = [],options = []){
+export function formatTableFields(fields = [],operation = []){
   const rst = fields.map( fieldCfg => {
     const { field, label, ...rest } = fieldCfg;
     return {
@@ -18,17 +18,17 @@ export function formatTableFields(fields = [],options = []){
       ...rest,
     };
   } );
-  if(options.length > 0){
+  if(operation.length > 0){
     rst.push({
-      dataIndex: 'options',
+      dataIndex: 'operation',
       title: '',
       width: 30,
       render: (text, record, index) => {
-        return <ListOptions
-        text={ text }
-        record={ record }
-        index={ index }
-        options={ options }
+        return <ListOperation
+          text={ text }
+          record={ record }
+          index={ index }
+          operation={ operation }
         />;
       },
     });
