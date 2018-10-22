@@ -1,40 +1,22 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import { Provider } from './FormEvenSet';
-// import { formatTableFields } from '../../utils/format';
+import { Provider } from './SearchEventSet';
 
-export default class FormEvenProxy extends Component {
+export default class SearchEventProxy extends Component {
   constructor(props){
     super(props);
     this.namespace = props.namespace;
     this.dispatch = props.dispatch;
-    this.type = queryString.parse(props.location.search).type;
-  }
-  componentDidMount(){
-    if(this.type === 'edit'){
-      this.handleGetData();
-    }
-  }
-  handleGetData = () => {
-    const { dispatch, namespace } = this;
-    const id = queryString.parse(this.props.location.search).id;
-
-    dispatch({
-      type: `${namespace}/getOne`,
-      payload: {
-        id,
-      },
-    });
   }
   handleFieldsChange = (fields) => {
     const { dispatch, namespace } = this;
-    const { formData = {} } = this.props.modelStatus || {};
+    const { searchData = {} } = this.props.modelStatus || {};
     
     dispatch({
       type: `${namespace}/save`,
       payload: {
-        formData: {
-          ...formData,
+        searchData: {
+          ...searchData,
           ...fields
         },
       },
@@ -43,25 +25,26 @@ export default class FormEvenProxy extends Component {
 
   render(){
     const {
-      fields = [], layout, modelStatus = {},
+      config = {}, layout, modelStatus = {},
       children,
     } = this.props;
-    const { formData } = modelStatus || {};
+    const { searchData } = modelStatus || {};
+    const { fields = [] } = config;
 
-    const evenSet = {
+    const EventSet = {
             onRefresh: this.handleGetData,
             onFieldsChange: this.handleFieldsChange,
             onSubmit: this.handleSubmit,
           };
     
-    console.log('FormEvenProxy Props:',this.props);
+    console.log('SearchEventProxy Props:',this.props);
     return <Provider
-      value={ evenSet }
+      value={ EventSet }
     >
       { React.cloneElement(children,{
           fields,
           layout,
-          formData,
+          searchData,
           onRefresh: this.handleGetData,
           onSubmit: this.handleSubmit,
           onFieldsChange: this.handleFieldsChange,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
-import { Consumer } from '../EvenProxy/List/ListEvenSet';
+import { Consumer } from '../EventProxy/List/ListEventSet';
 import './index.css';
 
 export default props => (

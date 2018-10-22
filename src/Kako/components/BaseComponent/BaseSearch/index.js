@@ -1,19 +1,19 @@
 import React,{ Component } from 'react';
 import { Form, Button } from 'antd';
 import { getMainLayout, getFormItem } from '../../../utils/readConfig';
-import FormEventProxy from '../../EventProxy/Form/FormEventProxy';
+import SearchEventProxy from '../../EventProxy/Search/SearchEventProxy';
 import { Object } from 'core-js';
 import './index.css';
 
-export default class BaseForm extends Component{
+export default class BaseSearch extends Component{
   render(){
-    return <FormEventProxy { ...this.props }>
-      <FormWrapped />
-    </FormEventProxy>
+    return <SearchEventProxy { ...this.props }>
+      <SearchWrapped />
+    </SearchEventProxy>
   }
 }
 
-class FormWrapped extends Component{
+class SearchWrapped extends Component{
   handleReset = () => {
     this.props.form.resetFields();
     this.props.onRefresh();
@@ -26,16 +26,16 @@ class FormWrapped extends Component{
     return <Form layout="inline">
     <MainLayout>
       { fields.map( field => getFormItem(getFieldDecorator,field) ) }
+      <div className="Kako-BaseSearc-operation">
+        <Button onClick={ this.handleReset }>重置</Button>
+        <Button type="primary" htmlType="submit">搜索</Button>
+      </div>
     </MainLayout>
-    <div className="Kako-BaseForm-textALignRight">
-      <Button onClick={ this.handleReset }>重置</Button>
-      <Button type="primary" htmlType="submit">保存</Button>
-    </div>
   </Form>
   }
 };
 
-FormWrapped = Form.create({
+SearchWrapped = Form.create({
   mapPropsToFields: (props) => {
     const { formData = {} } = props;
     const newFields = {};
@@ -55,4 +55,4 @@ FormWrapped = Form.create({
       props.onFieldsChange(changeField);
     }
   }
-})(FormWrapped);
+})(SearchWrapped);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import { Provider } from './ListEvenSet';
+import { Provider } from './ListEventSet';
 import { formatTableFields } from '../../../utils/format';
 
-export default class ListEvenProxy extends Component {
+export default class ListEventProxy extends Component {
   constructor(props){
     super(props);
     this.namespace = props.namespace;
@@ -70,7 +70,7 @@ export default class ListEvenProxy extends Component {
           }
           : false;
 
-    const evenSet = {
+    const EventSet = {
             onCurrentChange: this.handleTableChange,
             onPageSizeChange: this.handleTableChange,
             onRefresh: this.handleTableRefresh,
@@ -78,9 +78,9 @@ export default class ListEvenProxy extends Component {
             onDelete: this.handleDelete,
           };
     
-    console.log('ListEvenProxy Props:',this.props);
+    console.log('ListEventProxy Props:',this.props);
     return <Provider
-      value={ evenSet }
+      value={ EventSet }
     >
       { React.cloneElement(children,{
         rowKey: 'id',

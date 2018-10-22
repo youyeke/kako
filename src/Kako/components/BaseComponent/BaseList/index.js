@@ -1,11 +1,11 @@
 import React,{ Component } from 'react';
 import { Table } from 'antd';
-import FormEvenProxy from '../../EvenProxy/List/ListEvenProxy';
+import ListEventProxy from '../../EventProxy/List/ListEventProxy';
 
 export default class BaseList extends Component{
   render(){
-    return <FormEvenProxy { ...this.props }>
+    return <ListEventProxy { ...this.props }>
       <Table />
-    </FormEvenProxy>
+    </ListEventProxy>
   }
 }

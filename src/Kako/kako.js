@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Provider } from './components/EvenProxy/Global/GlobalSet';
+import { Provider } from './components/EventProxy/Global/GlobalSet';
 import { getMainLayout, getItem } from './utils/readConfig';
 
 

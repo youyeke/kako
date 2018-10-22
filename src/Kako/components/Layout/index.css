@@ -9,3 +9,10 @@
 .Kako-Layout-FormDefault .ant-select-selection{
   width: 180px;
 }
+
+.Kako-Layout-SearchDefault{
+  margin: 0 auto;
+  text-align: right;
+  margin-right: 1em;
+  height: 40px;
+}
