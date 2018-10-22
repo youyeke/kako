@@ -3,6 +3,7 @@ import { Form, Button } from 'antd';
 import { getMainLayout, getFormItem } from '../../../utils/readConfig';
 import FormEvenProxy from '../../EvenProxy/Form/FormEvenProxy';
 import { Object } from 'core-js';
+import './index.css';
 
 export default class BaseForm extends Component{
   render(){
@@ -26,7 +27,7 @@ class FormWrapped extends Component{
     <MainLayout>
       { fields.map( field => getFormItem(getFieldDecorator,field) ) }
     </MainLayout>
-    <div>
+    <div className="Kako-BaseForm-textALignRight">
       <Button onClick={ this.handleReset }>重置</Button>
       <Button type="primary" htmlType="submit">保存</Button>
     </div>

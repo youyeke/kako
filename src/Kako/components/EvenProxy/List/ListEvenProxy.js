@@ -48,6 +48,9 @@ export default class ListEvenProxy extends Component {
     }
     console.log('on Edit',record,options);
   }
+  handleDelete = (record) => {
+    console.log('on Delete',record);
+  }
 
   render(){
     const {
@@ -72,6 +75,7 @@ export default class ListEvenProxy extends Component {
             onPageSizeChange: this.handleTableChange,
             onRefresh: this.handleTableRefresh,
             onEdit: this.handleEdit,
+            onDelete: this.handleDelete,
           };
     
     console.log('ListEvenProxy Props:',this.props);

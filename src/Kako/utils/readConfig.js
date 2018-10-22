@@ -1,7 +1,7 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { Form } from 'antd';
 import * as LayoutSet from '../components/Layout';
-import { SASearch, SAList } from '../components/Animation';
+import { BaseEnter } from '../components/Animation';
 import * as BaseComponentSet from '../components/BaseComponent';
 
 import { getFormItemType } from './getFormItemType';
@@ -20,20 +20,15 @@ export function getMainLayout(layoutName){
 }
 
 export function getItem(itemConfig,index,props){
-  const { support, component, ...restConfig } = itemConfig;
-  const supportMap = {
-    Search: SASearch,
-    List: SAList,
-  };
+  const { component, ...restConfig } = itemConfig;
   const contentMap = {
     ...BaseComponentSet,
     ...extendsComponent,
   };
-  const Support = supportMap[support] || supportMap['Search'];
   const Content = contentMap[component] || contentMap['BaseList'];
-  return <Support { ...restConfig } key={ index }>
+  return <BaseEnter { ...restConfig } key={ index }>
     <Content { ...props } />
-  </Support>;
+  </BaseEnter>
 }
 
 export function getFormItem(getFieldDecorator,field){

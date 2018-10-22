@@ -1,5 +1,5 @@
-import React from 'react';
-import { Icon, Dropdown, Menu } from 'antd';
+import React, { Component } from 'react';
+import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
 import { Consumer } from '../EvenProxy/List/ListEvenSet';
 import './index.css';
 
@@ -9,19 +9,66 @@ export default props => (
   </Consumer>
 );
 
-const ListOperation = ({ text, record, index, operation, context }) => {
-  function actionMap(type, actionOts) {
+class ListOperation extends Component{
+  state = {
+    visible: false,
+  }
+  actionMap = (type, actionOts) => {
+    const { text, record, index, operation, context } = this.props;
     type = type.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+
     if( context[`on${type}`] ){
-      context[`on${type}`](record,actionOts);
+      if( type === 'Delete' ){
+        this.setState({
+          visible: true,
+        });
+      }else{
+        context[`on${type}`](record,actionOts);
+      }
     }else{
       console.warn(`未注册的事件： on${type}`)
     }
   }
-  return <Dropdown overlay={ renderMemu(record,operation,actionMap) } trigger={['click']} placement="bottomRight">
-    <Icon style={{fontSize: '24px'}} type="ellipsis" />
-  </Dropdown>;
+  handleCancel = () => {
+    this.setState({
+      visible: false,
+    });
+  }
+  handleConfirm = () => {
+    const { record, context } = this.props;
+    context[`onDelete`](record);
+    this.handleCancel();
+  }
+
+  render(){
+    const { record, operation } = this.props;
+    const { visible } = this.state;
+
+    const popconfirmProps = {
+      title: '确定要删除该项吗？',
+      visible,
+      onCancel: this.handleCancel,
+      onConfirm: this.handleConfirm,
+    };
+
+    return <Popconfirm { ...popconfirmProps }>
+      <Dropdown overlay={ renderMemu(record,operation,this.actionMap) } trigger={['click']} placement="bottomRight">
+        <Icon style={{fontSize: '24px'}} type="ellipsis" />
+      </Dropdown>
+    </Popconfirm>
+  }
 }
+// const ListOperation = ({ text, record, index, operation, context }) => {
+//   function actionMap(type, actionOts) {
+//     type = type.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+//     if( context[`on${type}`] ){
+//       context[`on${type}`](record,actionOts);
+//     }else{
+//       console.warn(`未注册的事件： on${type}`)
+//     }
+//   }
+//   return 
+// }
 
 function renderMemu(record,operation,actionMap){
   let menuItemList = operation.map( (v,i,a) => {
