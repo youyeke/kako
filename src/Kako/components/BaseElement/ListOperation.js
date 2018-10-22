@@ -56,8 +56,8 @@ const operationMap = {
       'default': '#666',
     };
     return (
-      <Menu.Item key={i} className="Kako-table-action-menuItem" >
-        <span onClick={ actionMap.bind(null, v.action, v.options ) }>
+      <Menu.Item key={i} className="Kako-table-action-menuItem" onClick={ actionMap.bind(null, v.action, v.options ) } >
+        <span>
           <Icon type={ iconMap[v.action] || iconMap['default'] } style={{ color: `${iconColorMap[v.action] || iconColorMap['default']}` }} />{ v.title }
         </span>
       </Menu.Item>
