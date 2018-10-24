@@ -1,37 +1,65 @@
-import React,{ Component } from 'react';
-import { Form, Button } from 'antd';
+import React, { Component } from 'react';
+import { Flex } from '../../Layout';
+import { Form, Button, Icon } from 'antd';
 import { getMainLayout, getFormItem } from '../../../utils/readConfig';
 import SearchEventProxy from '../../EventProxy/Search/SearchEventProxy';
 import { Object } from 'core-js';
 import './index.css';
 
-export default class BaseSearch extends Component{
-  render(){
-    return <SearchEventProxy { ...this.props }>
+const { FlexItem } = Flex;
+
+export default class BaseSearch extends Component {
+  render() {
+    return <SearchEventProxy {...this.props}>
       <SearchWrapped />
     </SearchEventProxy>
   }
 }
 
-class SearchWrapped extends Component{
+class SearchWrapped extends Component {
+  state = {
+    more: false,
+  }
+  switchViewMore = () => {
+    this.setState({
+      more: !this.state.more,
+    });
+  }
   handleReset = () => {
     this.props.form.resetFields();
     this.props.onRefresh();
   }
 
-  render(){
+  render() {
     const { layout, form, fields } = this.props;
+    const { more } = this.state;
     const MainLayout = getMainLayout(layout);
     const { getFieldDecorator } = form;
+
     return <Form layout="inline">
-    <MainLayout>
-      { fields.map( field => getFormItem(getFieldDecorator,field) ) }
-      <div className="Kako-BaseSearc-operation">
-        <Button onClick={ this.handleReset }>重置</Button>
-        <Button type="primary" htmlType="submit">搜索</Button>
-      </div>
-    </MainLayout>
-  </Form>
+      <MainLayout more={more}>
+        <Flex align="flex-start">
+          <FlexItem>
+            {fields.map(field => getFormItem(getFieldDecorator, field))}
+          </FlexItem>
+          <FlexItem flex={1}>
+            <div className="Kako-BaseSearc-operation">
+              <Button onClick={this.handleReset}>重置</Button>
+              <Button type="primary" htmlType="submit">搜索</Button>
+              <span onClick={this.switchViewMore} className="Kako-BaseSearc-viewMore">
+                { more ? (
+                  <span> 收起 <Icon type="up" theme="outlined" /></span>
+                )
+                  : (
+                    <span> 展开 <Icon type="down" theme="outlined" /></span>
+                  )
+                }
+              </span>
+            </div>
+          </FlexItem>
+        </Flex>
+      </MainLayout>
+    </Form>
   }
 };
 
@@ -39,19 +67,19 @@ SearchWrapped = Form.create({
   mapPropsToFields: (props) => {
     const { formData = {} } = props;
     const newFields = {};
-    Object.keys(formData).forEach( field => {
-      newFields[field] =  Form.createFormField({
+    Object.keys(formData).forEach(field => {
+      newFields[field] = Form.createFormField({
         value: formData[field],
       })
-    } )
+    })
     return newFields;
   },
   onFieldsChange: (props, fields) => {
-    if(props.onFieldsChange){
+    if (props.onFieldsChange) {
       const changeField = {};
-      Object.keys(fields).forEach( key => {
+      Object.keys(fields).forEach(key => {
         changeField[key] = fields[key].value;
-      } )
+      })
       props.onFieldsChange(changeField);
     }
   }

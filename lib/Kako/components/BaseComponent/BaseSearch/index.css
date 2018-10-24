@@ -1,5 +1,10 @@
 .Kako-BaseSearc-operation{
+  width: 200px;
   height: 40px;
   line-height: 40px;
   text-align: left;
+}
+.Kako-BaseSearc-viewMore{
+  margin-left: 1em;
+  cursor: pointer;
 }
