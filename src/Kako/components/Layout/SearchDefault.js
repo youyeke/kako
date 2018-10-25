@@ -3,6 +3,11 @@ import { Row } from 'antd';
 import './index.css';
 
 export default class SearchDefault extends Component {
+  componentDidMount(){
+    if( this.searchItemEl.scrollHeight > 40 ){
+      this.props.onShowViewMore();
+    }
+  }
   getSearchItemHeight(more){    
     if(more && this.searchItemEl){
       return this.searchItemEl.scrollHeight;

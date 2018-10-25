@@ -1,8 +1,8 @@
 {
   "name": "kako",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "通过配置文件生成后台管理页面",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "dependencies": {
     "antd": "^3.10.0",
     "moment": "^2.22.2",
@@ -14,8 +14,8 @@
     "react-scripts": "2.0.3"
   },
   "scripts": {
-    "build": "npm run clean && gulp default",
-    "clean": "rimraf lib/"
+    "build": "webpack --config ./build/webpack.production.js",
+    "cleanAll": "rimraf dist/ && rimraf node_modules/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,13 +35,21 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^8.0.0",
-    "gulp-plumber": "^1.2.0",
-    "gulp-uglify": "^3.0.1",
-    "rimraf": "^2.6.2"
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.23.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  },
+  "peerDependencies": {
+    "react": "^15.0.2|| ^16.0.0-rc || ^16.0.0",
+    "react-dom": "^15.0.2|| ^16.0.0-rc || ^16.0.0"
   }
 }

@@ -18,7 +18,13 @@ export default class BaseSearch extends Component {
 
 class SearchWrapped extends Component {
   state = {
+    visibleViewMore: false,
     more: false,
+  }
+  onShowViewMore = () => {
+    this.setState({
+      visibleViewMore: true,
+    });
   }
   switchViewMore = () => {
     this.setState({
@@ -32,12 +38,12 @@ class SearchWrapped extends Component {
 
   render() {
     const { layout, form, fields } = this.props;
-    const { more } = this.state;
+    const { visibleViewMore, more } = this.state;
     const MainLayout = getMainLayout(layout);
     const { getFieldDecorator } = form;
 
     return <Form layout="inline">
-      <MainLayout more={more}>
+      <MainLayout more={more} onShowViewMore={ this.onShowViewMore }>
         <Flex align="flex-start">
           <FlexItem>
             {fields.map(field => getFormItem(getFieldDecorator, field))}
@@ -46,15 +52,20 @@ class SearchWrapped extends Component {
             <div className="Kako-BaseSearc-operation">
               <Button onClick={this.handleReset}>重置</Button>
               <Button type="primary" htmlType="submit">搜索</Button>
-              <span onClick={this.switchViewMore} className="Kako-BaseSearc-viewMore">
-                { more ? (
-                  <span> 收起 <Icon type="up" theme="outlined" /></span>
+              { visibleViewMore ? 
+                (
+                  <span onClick={this.switchViewMore} className="Kako-BaseSearc-viewMore">
+                    { more ? (
+                      <span> 收起 <Icon type="up" theme="outlined" /></span>
+                    )
+                      : (
+                        <span> 展开 <Icon type="down" theme="outlined" /></span>
+                      )
+                    }
+                  </span>
                 )
-                  : (
-                    <span> 展开 <Icon type="down" theme="outlined" /></span>
-                  )
-                }
-              </span>
+                : null
+              }
             </div>
           </FlexItem>
         </Flex>
