@@ -4,8 +4,9 @@ var merge = require('webpack-merge')
 
 module.exports = merge(baseConfigs, {
   mode: 'production',
+  devtool: 'source-map',
   entry: {
-    index: './src/Kako/index.js'
+    index: './src/index.js'
   },
   output: {
     path: path.join(__dirname, '../dist'),

@@ -22,9 +22,7 @@ export default class ListEventProxy extends Component {
         current,
         pageSize,
       },
-    }).then( (rst) => {
-      // TODO set ready status
-    } );
+    })
   }
   handleTableChange = (current,pageSize) => {
     this.handleGetListData(current,pageSize);
