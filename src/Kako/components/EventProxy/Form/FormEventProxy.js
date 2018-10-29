@@ -4,44 +4,46 @@ import { Provider } from './FormEventSet';
 // import { formatTableFields } from '../../utils/format';
 
 export default class FormEventProxy extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.namespace = props.namespace;
-    this.dispatch = props.dispatch;
-    this.type = queryString.parse(props.location.search).type;
+
+    const { getAPI, createAPI, updateAPI } = props;
+    props.dispatch.setAPI('getAPI', getAPI);
+    props.dispatch.setAPI('createAPI', createAPI);
+    props.dispatch.setAPI('updateAPI', updateAPI);
+
+    this.type = queryString.parse(props.location.search.replace('?','')).type;
   }
-  componentDidMount(){
-    if(this.type === 'edit'){
+  componentDidMount() {
+    if (this.type === 'edit') {
       this.handleGetData();
     }
   }
   handleGetData = () => {
-    const { dispatch, namespace } = this;
-    const id = queryString.parse(this.props.location.search).id;
+    const { dispatch } = this.props;
+    const id = queryString.parse(this.props.location.search.replace('?','')).id;
 
-    dispatch({
-      type: `${namespace}/getOne`,
+    dispatch.fetchOne({
       payload: {
         id,
-      },
-    });
+      }
+    })
   }
   handleFieldsChange = (fields) => {
-    const { dispatch, namespace } = this;
+    const { dispatch } = this.props;
     const { formData = {} } = this.props.modelStatus || {};
-    
-    dispatch({
-      type: `${namespace}/save`,
+
+    dispatch.save({
       payload: {
         formData: {
           ...formData,
           ...fields
         },
-      },
+      }
     });
   }
 
-  render(){
+  render() {
     const {
       config = {}, layout, modelStatus = {},
       children,
@@ -50,23 +52,23 @@ export default class FormEventProxy extends Component {
     const { fields = [] } = config;
 
     const EventSet = {
-            onRefresh: this.handleGetData,
-            onFieldsChange: this.handleFieldsChange,
-            onSubmit: this.handleSubmit,
-          };
-    
-    console.log('FormEventProxy Props:',this.props);
+      onRefresh: this.handleGetData,
+      onFieldsChange: this.handleFieldsChange,
+      onSubmit: this.handleSubmit,
+    };
+
+    console.log('FormEventProxy Props:', this.props);
     return <Provider
-      value={ EventSet }
+      value={EventSet}
     >
-      { React.cloneElement(children,{
-          fields,
-          layout,
-          formData,
-          onRefresh: this.handleGetData,
-          onSubmit: this.handleSubmit,
-          onFieldsChange: this.handleFieldsChange,
-      }) }
+      {React.cloneElement(children, {
+        fields,
+        layout,
+        formData,
+        onRefresh: this.handleGetData,
+        onSubmit: this.handleSubmit,
+        onFieldsChange: this.handleFieldsChange,
+      })}
     </Provider>
   }
 }

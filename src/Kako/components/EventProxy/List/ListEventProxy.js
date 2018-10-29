@@ -4,38 +4,38 @@ import { Provider } from './ListEventSet';
 import { formatTableFields } from '../../../utils/format';
 
 export default class ListEventProxy extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.namespace = props.namespace;
-    this.dispatch = props.dispatch;
+
+    const { API } = props;
+    props.dispatch.setAPI('listAPI', API);
   }
-  componentDidMount(){
+  componentDidMount() {
     this.handleGetListData(1, 10);
   }
 
-  handleGetListData = (current,pageSize) => {
-    const { dispatch, namespace } = this;
+  handleGetListData = (current, pageSize) => {
+    const { dispatch } = this.props;
 
-    dispatch({
-      type: `${namespace}/getList`,
+    dispatch.fetchList({
       payload: {
         current,
         pageSize,
-      },
+      }
     })
   }
-  handleTableChange = (current,pageSize) => {
-    this.handleGetListData(current,pageSize);
+  handleTableChange = (current, pageSize) => {
+    this.handleGetListData(current, pageSize);
   }
   handleTableRefresh = () => {
     const { listData = {} } = this.props.modelStatus;
     const { current = 1, pageSize = 10 } = listData;
-    this.handleGetListData(current,pageSize);
+    this.handleGetListData(current, pageSize);
   }
-  handleEdit = (record,options = {}) => {
+  handleEdit = (record, options = {}) => {
     const { history } = this.props;
     const { path, field = 'id' } = options;
-    if(history && path){
+    if (history && path) {
       history.push({
         pathname: path,
         search: queryString.stringify({
@@ -44,13 +44,13 @@ export default class ListEventProxy extends Component {
         }),
       });
     }
-    console.log('on Edit',record,options);
+    console.log('on Edit', record, options);
   }
   handleDelete = (record) => {
-    console.log('on Delete',record);
+    console.log('on Delete', record);
   }
 
-  render(){
+  render() {
     const {
       config = {}, modelStatus = {},
       children,
@@ -59,33 +59,33 @@ export default class ListEventProxy extends Component {
     const { data = [], ...restListProps } = modelStatus.listData || {};
 
     const paginationProps = pagination ?
-          {
-            ...restListProps, // current, pageSize, total
-            onChange: this.handleTableChange,
-            onShowSizeChange: this.handleTableChange,
-            showQuickJumper: true,
-            showSizeChanger: true,
-          }
-          : false;
+      {
+        ...restListProps, // current, pageSize, total
+        onChange: this.handleTableChange,
+        onShowSizeChange: this.handleTableChange,
+        showQuickJumper: true,
+        showSizeChanger: true,
+      }
+      : false;
 
     const EventSet = {
-            onCurrentChange: this.handleTableChange,
-            onPageSizeChange: this.handleTableChange,
-            onRefresh: this.handleTableRefresh,
-            onEdit: this.handleEdit,
-            onDelete: this.handleDelete,
-          };
-    
-    console.log('ListEventProxy Props:',this.props);
+      onCurrentChange: this.handleTableChange,
+      onPageSizeChange: this.handleTableChange,
+      onRefresh: this.handleTableRefresh,
+      onEdit: this.handleEdit,
+      onDelete: this.handleDelete,
+    };
+
+    console.log('ListEventProxy Props:', this.props);
     return <Provider
-      value={ EventSet }
+      value={EventSet}
     >
-      { React.cloneElement(children,{
+      {React.cloneElement(children, {
         rowKey: 'id',
-        columns: formatTableFields(fields,operation),
+        columns: formatTableFields(fields, operation),
         dataSource: data,
         pagination: paginationProps,
-      }) }
+      })}
     </Provider>
   }
 }
