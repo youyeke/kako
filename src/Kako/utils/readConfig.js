@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'antd';
+import { Form, Button } from 'antd';
 import * as LayoutSet from '../components/Layout';
 import { BaseEnter } from '../components/Animation';
 import * as BaseComponentSet from '../components/BaseComponent';

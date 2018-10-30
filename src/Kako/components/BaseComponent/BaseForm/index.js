@@ -18,12 +18,21 @@ class FormWrapped extends Component{
     this.props.form.resetFields();
     this.props.onRefresh();
   }
+  handleOnSubmit = (e) => {
+    e.preventDefault();
+    const { form, onSubmit } = this.props;
+    form.validateFields((err, values) => {
+      if (!err) {
+        onSubmit(values);
+      }
+    });
+  }
 
   render(){
     const { layout, form, fields } = this.props;
     const MainLayout = getMainLayout(layout);
     const { getFieldDecorator } = form;
-    return <Form layout="inline">
+    return <Form layout="inline" onSubmit={ this.handleOnSubmit }>
     <MainLayout>
       { fields.map( field => getFormItem(getFieldDecorator,field) ) }
     </MainLayout>

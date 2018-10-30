@@ -29,7 +29,7 @@ export default class SearchEventProxy extends Component {
       children,
     } = this.props;
     const { searchData } = modelStatus || {};
-    const { fields = [] } = config;
+    const { fields = [], actions = [] } = config;
 
     const EventSet = {
             onRefresh: this.handleGetData,
@@ -43,6 +43,7 @@ export default class SearchEventProxy extends Component {
     >
       { React.cloneElement(children,{
           fields,
+          actions,
           layout,
           searchData,
           onRefresh: this.handleGetData,

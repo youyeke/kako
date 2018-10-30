@@ -19,6 +19,15 @@ export default class FormEventProxy extends Component {
       this.handleGetData();
     }
   }
+  componentWillUnmount(){
+    const { dispatch } = this.props;
+    dispatch.save({
+      payload: {
+        formData: {},
+      }
+    })
+  }
+
   handleGetData = () => {
     const { dispatch } = this.props;
     const id = queryString.parse(this.props.location.search.replace('?','')).id;
@@ -41,6 +50,40 @@ export default class FormEventProxy extends Component {
         },
       }
     });
+  }
+  handleSubmit = (fields) => {
+    const { dispatch, history, REDIRECT } = this.props;
+    if (this.type === 'edit') {
+      const id = queryString.parse(this.props.location.search.replace('?','')).id;
+      const rst = dispatch.updateForm({
+        payload: {
+          fields,
+          id,
+        },
+      });
+      console.log(555,rst);
+
+    }else{
+      const rst = dispatch.createForm({
+        payload: fields,
+      });
+      rst.then( ({code, data = {}}) => {
+        console.log(666,data);
+        if(REDIRECT){
+          let path = REDIRECT;
+          if(path.indexOf('{')){
+            const keyList =  path.match(/\{\w+\}/g);
+            keyList && keyList.forEach( key => {
+              if( key.indexOf('{') > -1 ){
+                path = path.replace( key, data[key.replace(/\{|\}/g,'')] );
+              }
+            } );
+            path = path
+          }
+          history.push(path);
+        }
+      } );
+    }
   }
 
   render() {
