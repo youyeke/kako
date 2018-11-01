@@ -61,14 +61,12 @@ export default class FormEventProxy extends Component {
           id,
         },
       });
-      console.log(555,rst);
 
     }else{
       const rst = dispatch.createForm({
         payload: fields,
       });
       rst.then( ({code, data = {}}) => {
-        console.log(666,data);
         if(REDIRECT){
           let path = REDIRECT;
           if(path.indexOf('{')){

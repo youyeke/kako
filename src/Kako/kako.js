@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Provider } from './components/EventProxy/Global/GlobalSet';
+import { PageProvider } from './components/EventProxy/PageContext';
 import { Modal } from 'antd';
 import { getMainLayout, getItem } from './utils/readConfig';
 
@@ -20,7 +20,7 @@ export default class Kako extends Component {
     const { pageModalVisible, modalConfig } = this.state;
     const MainLayout = getMainLayout(config.layout);
     return (
-      <Provider
+      <PageProvider
         value={{
           dispatch: this.props.dispatch,
           namespace: this.props.namespace,
@@ -41,7 +41,7 @@ export default class Kako extends Component {
         >
           {pageModalVisible && getItem(modalConfig, 0, restProps)}
         </Modal>
-      </Provider>
+      </PageProvider>
     );
   }
 }

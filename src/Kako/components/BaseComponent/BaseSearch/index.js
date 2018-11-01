@@ -36,6 +36,15 @@ class SearchWrapped extends Component {
     this.props.form.resetFields();
     this.props.onRefresh();
   }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { form, onSubmit } = this.props;
+    form.validateFields((err, values) => {
+      if (!err) {
+        onSubmit(values);
+      }
+    });
+  }
 
   render() {
     const { layout, form, fields, actions } = this.props;
@@ -43,9 +52,9 @@ class SearchWrapped extends Component {
     const MainLayout = getMainLayout(layout);
     const { getFieldDecorator } = form;
 
-    return <Form layout="inline">
+    return <Form layout="inline" onSubmit={ this.handleSubmit }>
       <Flex align="flex-start">
-        <FlexItem flex={ 1 }>
+        <FlexItem flex={1}>
           <MainLayout more={more} onShowViewMore={this.onShowViewMore}>
             <Flex align="flex-start">
               <FlexItem>
@@ -75,7 +84,7 @@ class SearchWrapped extends Component {
           </MainLayout>
         </FlexItem>
         <FlexItem>
-          <ListAction actions={ actions } />
+          <ListAction actions={actions} />
         </FlexItem>
       </Flex>
     </Form>
@@ -84,11 +93,11 @@ class SearchWrapped extends Component {
 
 SearchWrapped = Form.create({
   mapPropsToFields: (props) => {
-    const { formData = {} } = props;
+    const { searchData = {} } = props;
     const newFields = {};
-    Object.keys(formData).forEach(field => {
+    Object.keys(searchData).forEach(field => {
       newFields[field] = Form.createFormField({
-        value: formData[field],
+        value: searchData[field],
       })
     })
     return newFields;

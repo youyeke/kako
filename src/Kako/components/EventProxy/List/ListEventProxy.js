@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { Provider } from './ListEventSet';
+import { setPageContext } from '../PageContext';
 import { formatTableFields } from '../../../utils/format';
 
 export default class ListEventProxy extends Component {
@@ -11,21 +12,27 @@ export default class ListEventProxy extends Component {
     props.dispatch.setAPI('listAPI', API);
   }
   componentDidMount() {
-    this.handleGetListData(1, 10);
+    this.handleTableChange(1, 10);
+    setPageContext('listFetch', this.handleGetListData);
+    setPageContext('listRefresh', this.handleTableRefresh);
   }
 
-  handleGetListData = (current, pageSize) => {
+  handleGetListData = ({ current, pageSize }, query = {}) => {
     const { dispatch } = this.props;
 
     dispatch.fetchList({
       payload: {
         current,
         pageSize,
+        ...query,
       }
     })
   }
   handleTableChange = (current, pageSize) => {
-    this.handleGetListData(current, pageSize);
+    this.handleGetListData({
+      current,
+      pageSize
+    });
   }
   handleTableRefresh = () => {
     const { listData = {} } = this.props.modelStatus;

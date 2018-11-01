@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
-import queryString from 'query-string';
 import { Provider } from './SearchEventSet';
+import { getPageContext } from '../PageContext';
 
 export default class SearchEventProxy extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.namespace = props.namespace;
-    this.dispatch = props.dispatch;
   }
   handleFieldsChange = (fields) => {
-    const { dispatch, namespace } = this;
-    const { searchData = {} } = this.props.modelStatus || {};
-    
-    dispatch({
-      type: `${namespace}/save`,
+    const { dispatch, modelStatus } = this.props;
+    const { searchData = {} } = modelStatus || {};
+
+    dispatch.save({
       payload: {
         searchData: {
           ...searchData,
           ...fields
         },
-      },
-    });
+      }
+    })
+  }
+  handleRefresh = () => {
+    const pageContext = getPageContext();
+    if(pageContext.listRefresh){
+      pageContext.listRefresh();
+    }
+  }
+  handleSubmit = (values) => {
+    const pageContext = getPageContext();
+    if(pageContext.listFetch){
+      pageContext.listFetch({},values);
+    }
   }
 
-  render(){
+  render() {
     const {
       config = {}, layout, modelStatus = {},
       children,
@@ -32,24 +41,24 @@ export default class SearchEventProxy extends Component {
     const { fields = [], actions = [] } = config;
 
     const EventSet = {
-            onRefresh: this.handleGetData,
-            onFieldsChange: this.handleFieldsChange,
-            onSubmit: this.handleSubmit,
-          };
-    
-    console.log('SearchEventProxy Props:',this.props);
+      onRefresh: this.handleGetData,
+      onFieldsChange: this.handleFieldsChange,
+      onSubmit: this.handleSubmit,
+    };
+
+    console.log('SearchEventProxy Props:', this.props);
     return <Provider
-      value={ EventSet }
+      value={EventSet}
     >
-      { React.cloneElement(children,{
-          fields,
-          actions,
-          layout,
-          searchData,
-          onRefresh: this.handleGetData,
-          onSubmit: this.handleSubmit,
-          onFieldsChange: this.handleFieldsChange,
-      }) }
+      {React.cloneElement(children, {
+        fields,
+        actions,
+        layout,
+        searchData,
+        onRefresh: this.handleRefresh,
+        onSubmit: this.handleSubmit,
+        onFieldsChange: this.handleFieldsChange,
+      })}
     </Provider>
   }
 }
