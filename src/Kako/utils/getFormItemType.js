@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Select } from 'antd';
 
+let extendsFormItemType = {};
 const baseType = {
   input: Input,
   select: class SelectWrapped extends Component{
@@ -17,7 +18,14 @@ export function getFormItemType(type,props){
   // props : placeholder styles className ...
   const typeMap = {
     ...baseType,
+    ...extendsFormItemType,
   };
   const MatchType = typeMap[type] || typeMap['input'];
   return <MatchType { ...props } />;
+}
+export function setFormItemTypeExtends(extendsObj) {
+  extendsFormItemType = {
+    ...extendsFormItemType,
+    ...extendsObj,
+  };
 }

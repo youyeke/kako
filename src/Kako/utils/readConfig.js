@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Button } from 'antd';
 import * as LayoutSet from '../components/Layout';
 import { BaseEnter } from '../components/Animation';
-import * as BaseComponentSet from '../components/BaseComponent';
 
 import { getFormItemType } from './getFormItemType';
 
@@ -11,7 +10,7 @@ const FormItem = Form.Item;
 let extendsComponent = {};
 let extendsLayout = {};
 
-export function getMainLayout(layoutName){
+export function getMainLayout(layoutName) {
   const layoutMap = {
     ...LayoutSet,
     ...extendsLayout,
@@ -19,34 +18,33 @@ export function getMainLayout(layoutName){
   return layoutMap[layoutName] || layoutMap['Grid'];
 }
 
-export function getItem(itemConfig,index,props){
+export function getItem(itemConfig, index, props) {
   const { component, ...restConfig } = itemConfig;
   const contentMap = {
-    ...BaseComponentSet,
     ...extendsComponent,
   };
   const Content = contentMap[component] || contentMap['BaseList'];
-  return <BaseEnter { ...restConfig } key={ index }>
-    <Content { ...props } />
+  return <BaseEnter {...restConfig} key={index}>
+    <Content {...props} />
   </BaseEnter>
 }
 
-export function getFormItem(getFieldDecorator,field){
+export function getFormItem(getFieldDecorator, field) {
   const { field: fieldName, label, value, type, span, ...rest } = field;
   return <FormItem
-          key={ fieldName }
-          label={ label || fieldName }
-          hasFeedback={ true }
-          span={ span }
-        >
-          {getFieldDecorator( fieldName , {
-            initialValue: value,
-            rules: [
-              // { required: true, message: '该项是必填的' }
-            ],
-          })(
-            getFormItemType(type,rest)
-          )}
+    key={fieldName}
+    label={label || fieldName}
+    hasFeedback={true}
+    span={span}
+  >
+    {getFieldDecorator(fieldName, {
+      initialValue: value,
+      rules: [
+        // { required: true, message: '该项是必填的' }
+      ],
+    })(
+      getFormItemType(type, rest)
+    )}
   </FormItem>
 }
 
@@ -56,8 +54,11 @@ export function getFormItem(getFieldDecorator,field){
  * @export
  * @param {*} extendsObj
  */
-export function setBaseComponentExtends(extendsObj){
-  extendsComponent = extendsObj;
+export function setBaseComponentExtends(extendsObj) {
+  extendsComponent = {
+    ...extendsComponent,
+    ...extendsObj,
+  };
 }
 
 /**
@@ -66,6 +67,9 @@ export function setBaseComponentExtends(extendsObj){
  * @export
  * @param {*} extendsObj
  */
-export function setLayoutExtends(extendsObj){
-  extendsLayout = extendsObj;
+export function setLayoutExtends(extendsObj) {
+  extendsLayout = {
+    ...extendsLayout,
+    ...extendsObj,
+  };
 }
