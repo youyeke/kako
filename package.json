@@ -1,7 +1,7 @@
 {
   "name": "kako",
-  "version": "0.0.9",
-  "description": "通过配置文件生成后台管理页面",
+  "version": "0.0.10",
+  "description": "读取配置文件，渲染对应组件",
   "main": "dist/index.js",
   "dependencies": {
     "antd": "^3.10.0",
@@ -17,17 +17,6 @@
     "build": "webpack --config ./build/webpack.production.js",
     "cleanAll": "rimraf dist/ && rimraf node_modules/"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "keywords": [
-    "react",
-    "manage",
-    "config",
-    "antd"
-  ],
-  "author": "youyeke",
-  "license": "ISC",
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -51,5 +40,18 @@
   "peerDependencies": {
     "react": "^15.0.2|| ^16.0.0-rc || ^16.0.0",
     "react-dom": "^15.0.2|| ^16.0.0-rc || ^16.0.0"
-  }
+  },
+  "keywords": [
+    "react",
+    "manage",
+    "config",
+    "antd"
+  ],
+  "author": "youyeke",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youyeke/kako"
+  },
+  "homepage": "https://github.com/youyeke/kako"
 }

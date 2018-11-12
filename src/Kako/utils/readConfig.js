@@ -30,18 +30,19 @@ export function getItem(itemConfig, index, props) {
 }
 
 export function getFormItem(getFieldDecorator, field) {
-  const { field: fieldName, label, value, type, span, ...rest } = field;
+  const {
+    field: fieldName, label, value, extra = '', span, rules = [],
+    type, ...rest } = field;
   return <FormItem
     key={fieldName}
     label={label || fieldName}
-    hasFeedback={true}
+    // hasFeedback={true}
+    extra={extra}
     span={span}
   >
     {getFieldDecorator(fieldName, {
       initialValue: value,
-      rules: [
-        // { required: true, message: '该项是必填的' }
-      ],
+      rules,// { required: true, message: '该项是必填的' }
     })(
       getFormItemType(type, rest)
     )}

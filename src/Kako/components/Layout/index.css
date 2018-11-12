@@ -2,12 +2,32 @@
   width: 50%;
   min-width: 300px;
   margin: 0 auto;
-  text-align: right;
   height: 60px;
+  display: flex;
+  justify-content: flex-end;
 }
 .Kako-Layout-FormDefault .ant-form-item-control-wrapper,
 .Kako-Layout-FormDefault .ant-select-selection{
   width: 180px;
+}
+
+.Kako-Layout-Exclusive{
+  width: 100%;
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+}
+.Kako-Layout-Exclusive .ant-form-item{
+  display: flex;
+  flex: 1;
+  margin-right: 0;
+}
+.Kako-Layout-Exclusive .ant-form-item-label{
+  width: 25%;
+}
+.Kako-Layout-Exclusive .ant-form-item-control-wrapper{
+  flex: 1;
 }
 
 .Kako-Layout-SearchDefault{

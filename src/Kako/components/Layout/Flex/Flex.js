@@ -10,7 +10,7 @@ export default ({ children, style = {}, className = '', align = 'center' }) => {
     alignItems: align,
     ...style,
   }
-  const defaultClassName = `kqd-flex-layout ${className}`;
+  const defaultClassName = `Kako-Layout-Flex ${className}`;
   return <div style={ defaultStyle } className={ defaultClassName }>
     { children }
   </div>
