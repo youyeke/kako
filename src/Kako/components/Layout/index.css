@@ -18,15 +18,15 @@
   display: flex;
   justify-content: flex-end;
 }
-.Kako-Layout-Exclusive .ant-form-item{
+.Kako-Layout-Exclusive div.ant-form-item{
   display: flex;
   flex: 1;
   margin-right: 0;
 }
-.Kako-Layout-Exclusive .ant-form-item-label{
+.Kako-Layout-Exclusive div.ant-form-item-label{
   width: 25%;
 }
-.Kako-Layout-Exclusive .ant-form-item-control-wrapper{
+.Kako-Layout-Exclusive div.ant-form-item-control-wrapper{
   flex: 1;
 }
 
