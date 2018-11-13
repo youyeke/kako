@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Select } from 'antd';
 import Number from './Number';
+import TextArea from './TextArea';
 
 export default {
   input: Input,
@@ -16,4 +17,5 @@ export default {
     }
   },
   number: Number,
+  textArea: TextArea,
 }

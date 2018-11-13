@@ -9,7 +9,7 @@ export default class Number extends Component{
       ...restProps,
       ...( (typeMap[type] && typeMap[type](symbol)) || {} )
     };
-    return <InputNumber {...numberProps} />
+    return <InputNumber {...numberProps} />;
   }
 };
 
