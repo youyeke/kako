@@ -31,8 +31,10 @@ export function getItem(itemConfig, index, props) {
 
 export function getFormItem(getFieldDecorator, field) {
   const {
-    field: fieldName, label, value, extra = '', span, rules = [],
-    type, ...rest } = field;
+    field: fieldName, label, value, extra = '', span,
+    rules = [],
+    type,
+    ...rest } = field;
   return <FormItem
     key={fieldName}
     label={label || fieldName}
@@ -42,11 +44,24 @@ export function getFormItem(getFieldDecorator, field) {
   >
     {getFieldDecorator(fieldName, {
       initialValue: value,
-      rules,// { required: true, message: '该项是必填的' }
+      rules: [
+        ...defaultRule(type),
+        ...rules,
+        // { required: true, message: '该项是必填的' }
+      ],
     })(
       getFormItemType(type, rest)
     )}
   </FormItem>
+}
+
+function defaultRule(type) {
+  const ruleMap = {
+    'email': [{ type: 'email', message: '错误的邮箱格式。正确示例: abc@.def.com' }],
+    'phone': [{ pattern: /[0-9-()（）]{7,18}/, message: '错误的电话号码格式。应该由 7 到 18 位数字组成' }],
+    'mobile': [{ pattern: /0?(13|14|15|17|18)[0-9]{9}/, message: '错误的手机号码格式。' }],
+  }
+  return ruleMap[type] || [];
 }
 
 /**
