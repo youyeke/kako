@@ -12,7 +12,8 @@
   min-width: 180px;
   min-height: 52px;
 }
-.Kako-Layout-FormDefault div.ant-radio-group-outline{
+.Kako-Layout-FormDefault div.ant-radio-group-outline,
+.Kako-Layout-FormDefault div.ant-checkbox-group{
   line-height: 30px;
 }
 

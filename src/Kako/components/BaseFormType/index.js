@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Select, Radio } from 'antd';
+import { Input, Select, Radio, Checkbox } from 'antd';
 import Number from './Number';
 import TextArea from './TextArea';
 import Group from './Group';
@@ -26,6 +26,18 @@ export default {
             {option.title}
           </Radio>)}
       </Radio.Group>;
+    }
+  },
+  checkbox: class CheckboxWrapped extends Component {
+    render() {
+      const { options = [], ...restProps } = this.props;
+      return <Checkbox.Group
+        options={ options.map( item => ({
+          ...item,
+          label: item.title,
+        }) ) }
+        {...restProps}
+      />;
     }
   },
   number: Number,
