@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Select } from 'antd';
+import { Input, Select, Radio } from 'antd';
 import Number from './Number';
 import TextArea from './TextArea';
 import Group from './Group';
@@ -15,6 +15,17 @@ export default {
             {option.title}
           </Select.Option>)}
       </Select>;
+    }
+  },
+  radio: class RadioWrapped extends Component {
+    render() {
+      const { options = [], ...restProps } = this.props;
+      return <Radio.Group {...restProps}>
+        {options.map((option, i) =>
+          <Radio value={option.value} key={i}>
+            {option.title}
+          </Radio>)}
+      </Radio.Group>;
     }
   },
   number: Number,

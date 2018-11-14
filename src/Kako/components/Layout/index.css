@@ -8,10 +8,12 @@
   padding-bottom: 0;
   margin-bottom: 0;
 }
-.Kako-Layout-FormDefault .ant-form-item-control-wrapper,
-.Kako-Layout-FormDefault .ant-select-selection{
+.Kako-Layout-FormDefault div.ant-form-item-control-wrapper{
   min-width: 180px;
   min-height: 52px;
+}
+.Kako-Layout-FormDefault div.ant-radio-group-outline{
+  line-height: 30px;
 }
 
 .Kako-Layout-Exclusive{
