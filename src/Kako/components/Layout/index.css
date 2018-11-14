@@ -1,14 +1,17 @@
 .Kako-Layout-FormDefault{
-  width: 50%;
-  min-width: 300px;
-  margin: 0 auto;
-  min-height: 60px;
-  display: flex;
-  justify-content: flex-end;
+  width: 100%;
+  margin: 0;
+  /* min-height: 80px; */
+  padding: 0 12px;
+}
+.Kako-Layout-FormDefault div.ant-form-item{
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 .Kako-Layout-FormDefault .ant-form-item-control-wrapper,
 .Kako-Layout-FormDefault .ant-select-selection{
-  width: 180px;
+  min-width: 180px;
+  min-height: 52px;
 }
 
 .Kako-Layout-Exclusive{
@@ -25,6 +28,9 @@
 }
 .Kako-Layout-Exclusive div.ant-form-item-label{
   width: 25%;
+  text-align: right;
+  padding: 0 8px 0 0;
+  line-height: 32px;
 }
 .Kako-Layout-Exclusive div.ant-form-item-control-wrapper{
   flex: 1;
