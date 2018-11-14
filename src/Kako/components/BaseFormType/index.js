@@ -3,6 +3,7 @@ import { Input, Select, Radio, Checkbox } from 'antd';
 import Number from './Number';
 import TextArea from './TextArea';
 import Group from './Group';
+import Date from './Date';
 
 export default {
   input: Input,
@@ -43,4 +44,7 @@ export default {
   number: Number,
   textArea: TextArea,
   group: Group,
+  date: Date('date'),
+  week: Date('week'),
+  month: Date('month'),
 }
