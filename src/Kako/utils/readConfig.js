@@ -19,13 +19,14 @@ export function getMainLayout(layoutName) {
 }
 
 export function getItem(itemConfig, index, props) {
-  const { component, ...restConfig } = itemConfig;
+  const { PREVENTRENDER = false, component, ...restConfig } = itemConfig;
+
   const contentMap = {
     ...extendsComponent,
   };
   const Content = contentMap[component] || contentMap['BaseList'];
   return <BaseEnter {...restConfig} key={index}>
-    <Content {...props} />
+    {PREVENTRENDER ? null : (<Content {...props} />)}
   </BaseEnter>
 }
 
@@ -49,6 +50,7 @@ export function getFormItem(getFieldDecorator, field) {
         ...rules,
         // { required: true, message: '该项是必填的' }
       ],
+      validateTrigger: 'onBlur',
     })(
       getFormItemType(type, rest)
     )}
