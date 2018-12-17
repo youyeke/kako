@@ -8,7 +8,8 @@
   padding-bottom: 0;
   margin-bottom: 0;
 }
-.Kako-Layout-FormDefault div.ant-form-item-control-wrapper{
+.Kako-Layout-FormDefault div.ant-form-item-control-wrapper,
+.Kako-Layout-SearchDefault div.ant-form-item-control-wrapper{
   min-width: 180px;
   min-height: 52px;
 }
@@ -41,5 +42,6 @@
 
 .Kako-Layout-SearchDefault{
   display: inline-block;
-  transition: all .5s;
+  transition: all .2s;
+  overflow: hidden;
 }
