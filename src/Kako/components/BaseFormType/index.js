@@ -47,4 +47,5 @@ export default {
   date: Date('date'),
   week: Date('week'),
   month: Date('month'),
+  range: Date('range'),
 }

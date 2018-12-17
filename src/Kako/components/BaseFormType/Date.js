@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { DatePicker } from 'antd';
 import moment from 'moment';
-import styles from './index.css';
 
-const { WeekPicker, MonthPicker } = DatePicker;
+const { WeekPicker, MonthPicker, RangePicker } = DatePicker;
 const componentMap = {
   'date': DatePicker,
   'week': WeekPicker,
   'month': MonthPicker,
+  'range': RangePicker,
 };
 const formatMap = {
   'date': 'YYYY-MM-DD',
   'week': 'YYYY-W',
   'month': 'YYYY-MM',
+  'range': 'YYYY-MM-DD',
 }
 
 export default (componentName) => {
@@ -27,6 +28,7 @@ export default (componentName) => {
         value: initTime({
           value,
           nowTime,
+          componentName,
         }),
       }
     }
@@ -39,6 +41,7 @@ export default (componentName) => {
           value: initTime({
             value,
             nowTime,
+            componentName,
           }),
         };
       }
@@ -51,8 +54,11 @@ export default (componentName) => {
       if (!originalValue && value) {
         const { onChange, options = {} } = this.props;
         const { format = formatMap[componentName] } = options;
-
-        onChange(value.format(format));
+        if (componentName === 'range') {
+          onChange(value.map(item => item.format(format)));
+        } else {
+          onChange(value.format(format));
+        }
       }
     }
 
@@ -80,13 +86,24 @@ export default (componentName) => {
   };
 }
 
-function initTime({ value, nowTime }) {
+function initTime({ value, nowTime, componentName }) {
   if (value instanceof moment) {
     return value;
+  }
+  if (Array.isArray(value)) {
+    if (value[0] instanceof moment) {
+      return value;
+    } else {
+      return [moment(value[0]), moment(value[1])];
+    }
   }
   if (value) {
     return moment(value);
   } else {
-    return nowTime ? moment() : undefined;
+    return nowTime ?
+      componentName === 'range'
+        ? [moment(), moment()]
+        : moment()
+      : undefined;
   }
 }

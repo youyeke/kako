@@ -10,12 +10,16 @@
 }
 .Kako-Layout-FormDefault div.ant-form-item-control-wrapper,
 .Kako-Layout-SearchDefault div.ant-form-item-control-wrapper{
-  min-width: 180px;
+  min-width: 210px;
   min-height: 52px;
 }
 .Kako-Layout-FormDefault div.ant-radio-group-outline,
 .Kako-Layout-FormDefault div.ant-checkbox-group{
   line-height: 30px;
+}
+.Kako-Layout-FormDefault span.ant-calendar-picker-input,
+.Kako-Layout-SearchDefault span.ant-calendar-picker-input{
+  width: 210px;
 }
 
 .Kako-Layout-Exclusive{
@@ -44,4 +48,7 @@
   display: inline-block;
   transition: all .2s;
   overflow: hidden;
+}
+.Kako-Layout-SearchDefault .ant-form-item-label{
+  width: 7em;
 }
