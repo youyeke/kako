@@ -44,6 +44,32 @@
   flex: 1;
 }
 
+.Kako-Layout-FormInline .ant-form-item{
+  display: flex;
+  padding: 0;
+  height: 40px;
+}
+.Kako-Layout-FormInline .ant-form-item-label{
+  flex: 1;
+  text-align: right;
+  padding: 0;
+  margin-right: .5em;
+  line-height: 40px;
+  max-width: 10em;
+}
+.Kako-Layout-FormInline .ant-form-item-label::after{
+  content: ':';
+  display: inline-block;
+  width: .5em;
+  height: 1em;
+}
+.Kako-Layout-FormInline .ant-form-item-control-wrapper{
+  width: 210px;
+}
+.Kako-Layout-FormInline .ant-form-item-control{
+  line-height: 40px;
+}
+
 .Kako-Layout-SearchDefault{
   display: inline-block;
   transition: all .2s;

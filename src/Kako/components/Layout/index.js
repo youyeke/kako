@@ -3,6 +3,7 @@ import Flex from './Flex';
 
 import FormDefault from './FormDefault';
 import FormExclusive from './FormExclusive';
+import FormInline from './FormInline';
 import SearchDefault from './SearchDefault';
 
 export {
@@ -11,5 +12,6 @@ export {
   
   FormDefault,
   FormExclusive,
+  FormInline,
   SearchDefault,
 }
