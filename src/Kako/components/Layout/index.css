@@ -71,10 +71,23 @@
 }
 
 .Kako-Layout-SearchDefault{
-  display: inline-block;
+  display: flex;
   transition: all .2s;
   overflow: hidden;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.Kako-Layout-SearchDefault .ant-form-item{
+  display: flex;
+  margin: 0;
 }
 .Kako-Layout-SearchDefault .ant-form-item-label{
   width: 7em;
+}
+.Kako-Layout-SearchDefault .ant-form-item-control-wrapper{
+  flex: 1;
+}
+
+.Kako-Layout-SearchDefault .ant-select-enabled{
+  width: 100%;
 }

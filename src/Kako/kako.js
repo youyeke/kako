@@ -9,7 +9,7 @@ export default class Kako extends Component {
     const MainLayout = getMainLayout(config.layout);
     return (
       <MainLayout key="mainLayout" {...(config.config || {})}>
-        {config.items.map((itemCfg, index) => getItem(itemCfg, index, restProps))}
+        {config.items && config.items.map((itemCfg, index) => getItem(itemCfg, index, restProps))}
       </MainLayout>
     );
   }

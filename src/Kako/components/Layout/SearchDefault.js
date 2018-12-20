@@ -5,7 +5,9 @@ import './index.css';
 export default class SearchDefault extends Component {
   componentDidMount(){
     if( this.searchItemEl.scrollHeight > 40 ){
-      this.props.onShowViewMore();
+      if(this.props.onShowViewMore){
+        this.props.onShowViewMore();
+      }
     }
   }
   getSearchItemHeight(more){    
@@ -20,12 +22,10 @@ export default class SearchDefault extends Component {
       height: `${ this.getSearchItemHeight(more) }px`,
     };
     
-    return <Row>
+    return <div ref={ el => this.searchItemEl = el } style={ boxStyle } className="Kako-Layout-SearchDefault">
       {React.Children.map(children, (child, index) => {
-        return <div ref={ el => this.searchItemEl = el } style={ boxStyle } className="Kako-Layout-SearchDefault">
-          {child}
-        </div>
+        return child;
       })}
-    </Row>
+    </div>
   }
 }
