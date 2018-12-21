@@ -11,7 +11,7 @@
 .Kako-Layout-FormDefault div.ant-form-item-control-wrapper,
 .Kako-Layout-SearchDefault div.ant-form-item-control-wrapper{
   min-width: 210px;
-  min-height: 52px;
+  /* min-height: 52px; */
 }
 .Kako-Layout-FormDefault div.ant-radio-group-outline,
 .Kako-Layout-FormDefault div.ant-checkbox-group{
