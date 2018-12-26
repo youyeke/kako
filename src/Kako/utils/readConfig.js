@@ -22,9 +22,10 @@ export function getItem(itemConfig, index, props) {
   const { PREVENTRENDER = false, component, ...restConfig } = itemConfig;
 
   const contentMap = {
+    'default': () => <div>组件 {component} 未定义</div>,
     ...extendsComponent,
   };
-  const Content = contentMap[component] || contentMap['BaseList'];
+  const Content = contentMap[component] || contentMap['default'];
   return <BaseEnter {...restConfig} key={index}>
     {PREVENTRENDER ? null : (<Content {...props} />)}
   </BaseEnter>
