@@ -1,8 +1,8 @@
 {
   "name": "kako",
-  "version": "0.2.15",
+  "version": "0.3.0",
   "description": "读取配置文件，渲染对应组件",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "dependencies": {
     "antd": "^3.10.0",
     "moment": "^2.22.2",
@@ -14,7 +14,7 @@
     "react-scripts": "2.0.3"
   },
   "scripts": {
-    "build": "webpack --config ./build/webpack.production.js",
+    "build": "gulp",
     "cleanAll": "rimraf dist/ && rimraf node_modules/"
   },
   "browserslist": [
@@ -24,18 +24,21 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
-    "css-loader": "^1.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "rimraf": "^2.6.2",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.23.0",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
-    "webpack-merge": "^4.1.4"
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-decorators": "^7.2.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "babel-plugin-dva-hmr": "^0.4.1",
+    "babel-plugin-import": "^1.11.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-ignore": "^2.0.2",
+    "rimraf": "^2.6.2"
   },
   "peerDependencies": {
     "react": "^15.0.2|| ^16.0.0-rc || ^16.0.0",
