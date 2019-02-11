@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ children, style = {}, className = '', flex = '0 1 auto' }) => {
+const FlexItem = ({ children, style = {}, className = '', flex = '0 1 auto' }) => {
   const defaultStyle = {
     ...style,
     flex,
@@ -10,3 +10,4 @@ export default ({ children, style = {}, className = '', flex = '0 1 auto' }) => 
     { children }
   </div>
 }
+export default FlexItem;

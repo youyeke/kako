@@ -15,7 +15,14 @@ export function getMainLayout(layoutName) {
     ...LayoutSet,
     ...extendsLayout,
   };
-  return layoutMap[layoutName] || layoutMap['Grid'];
+  
+  if(layoutName === undefined) {
+    return layoutMap['Grid'];
+  }
+  return layoutMap[layoutName] || function (layoutName) {
+    console.warn(`未定义的 Layout: ${layoutName}`);
+    return <div>未定义的 Layout: {String(layoutName)}</div>
+  }.bind(null, layoutName);
 }
 
 export function getItem(itemConfig, index, props) {

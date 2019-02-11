@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 
-export default (props) => {
+const Flex = (props) => {
   const {
     align = 'center', justify = 'space-between',
     style = {}, className = '',
@@ -18,3 +18,4 @@ export default (props) => {
     {children}
   </div>
 }
+export default Flex;
