@@ -4,10 +4,15 @@ import Number from './Number';
 import TextArea from './TextArea';
 import Group from './Group';
 import Date from './Date';
+import contrast from '../../utils/contrast';
 
 export default {
   input: Input,
   select: class SelectWrapped extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+      return contrast(this.props, nextProps, ['value', 'options']);
+    }
+    
     render() {
       const { options = [], ...restProps } = this.props;
       return <Select {...restProps}>
@@ -19,6 +24,10 @@ export default {
     }
   },
   radio: class RadioWrapped extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+      return contrast(this.props, nextProps, ['value', 'options']);
+    }
+
     render() {
       const { options = [], ...restProps } = this.props;
       return <Radio.Group {...restProps}>
@@ -30,13 +39,17 @@ export default {
     }
   },
   checkbox: class CheckboxWrapped extends Component {
+    shouldComponentUpdate(nextProps, nextState) {
+      return contrast(this.props, nextProps, ['value', 'options']);
+    }
+
     render() {
       const { options = [], ...restProps } = this.props;
       return <Checkbox.Group
-        options={ options.map( item => ({
+        options={options.map(item => ({
           ...item,
           label: item.title,
-        }) ) }
+        }))}
         {...restProps}
       />;
     }
