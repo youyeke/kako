@@ -1,6 +1,6 @@
 {
   "name": "kako",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "读取配置文件，渲染对应组件",
   "main": "lib/index.js",
   "dependencies": {

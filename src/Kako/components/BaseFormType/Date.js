@@ -69,7 +69,7 @@ export default (componentName) => {
       }
     }
     render() {
-      const { options = {}, ...restProps } = this.props;
+      const { options = {}, onBlur, ...restProps } = this.props;
       const { format = formatMap[componentName] } = options;
       const { value } = this.state;
       const props = {
