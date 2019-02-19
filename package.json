@@ -1,6 +1,6 @@
 {
   "name": "kako",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "读取配置文件，渲染对应组件",
   "main": "lib/index.js",
   "dependencies": {
@@ -8,8 +8,8 @@
     "moment": "^2.22.2",
     "query-string": "^6.2.0",
     "rc-queue-anim": "^1.6.6",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
     "react-router-dom": "^4.3.1"
   },
   "scripts": {
