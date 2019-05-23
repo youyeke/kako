@@ -22,26 +22,28 @@ export default (componentName) => {
     constructor(props) {
       super(props);
       const { value, options = {} } = props;
-      const { nowTime = true } = options;
+      const { nowTime = true, format = formatMap[componentName] } = options;
       this.state = {
         originalValue: value,
         value: initTime({
           value,
           nowTime,
           componentName,
+          format,
         }),
       }
     }
     static getDerivedStateFromProps(nextProps, prevState) {
       if (prevState.originalValue !== nextProps.value) {
         const { value, options = {} } = nextProps;
-        const { nowTime = true } = options;
+        const { nowTime = true, format = formatMap[componentName] } = options;
         return {
           originalValue: value,
           value: initTime({
             value,
             nowTime,
             componentName,
+            format,
           }),
         };
       }
@@ -86,7 +88,7 @@ export default (componentName) => {
   };
 }
 
-function initTime({ value, nowTime, componentName }) {
+function initTime({ value, nowTime, componentName, format }) {
   if (value instanceof moment) {
     return value;
   }
@@ -94,7 +96,7 @@ function initTime({ value, nowTime, componentName }) {
     if (value[0] instanceof moment) {
       return value;
     } else {
-      return [moment(value[0]), moment(value[1])];
+      return [moment(value[0]).format(format), moment(value[1]).format(format)];
     }
   }
   if (value) {
@@ -102,8 +104,8 @@ function initTime({ value, nowTime, componentName }) {
   } else {
     return nowTime ?
       componentName === 'range'
-        ? [moment(), moment()]
-        : moment()
+        ? [moment().format(format), moment().format(format)]
+        : moment().format(format)
       : undefined;
   }
 }
