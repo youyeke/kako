@@ -96,7 +96,7 @@ function initTime({ value, nowTime, componentName, format }) {
     if (value[0] instanceof moment) {
       return value;
     } else {
-      return [moment(value[0]).format(format), moment(value[1]).format(format)];
+      return [moment(value[0], format), moment(value[1], format)];
     }
   }
   if (value) {
